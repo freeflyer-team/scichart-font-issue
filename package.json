@@ -1,0 +1,32 @@
+{
+  "name": "scichart-font-issue",
+  "version": "1.0.0",
+  "description": "Minimal repro for Scichart font issue.",
+  "main": "out/build/main/main.js",
+  "scripts": {
+    "vite:main": "vite --config vite.config.main.mjs",
+    "vite:renderer": "vite --config vite.config.renderer.mjs",
+    "build:main": "npm run vite:main build",
+    "build:renderer": "npm run vite:renderer build",
+    "build": "npm run build:main --mode=production && npm run build:renderer",
+    "start:main": "npm run build:main --mode=development && electron .",
+    "start:renderer": "npm run vite:renderer serve",
+    "start": "concurrently --kill-others \"npm run start:main\" \"npm run start:renderer\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "author": "a.i. solutions, Inc",
+  "license": "PRIVATE",
+  "private": true,
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@types/node": "^22.15.21",
+    "concurrently": "^9.1.2",
+    "electron": "^36.4.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-svelte": "^3.4.0",
+    "svelte": "^5.32.1",
+    "svelte-check": "^4.2.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}
