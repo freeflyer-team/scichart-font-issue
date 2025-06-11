@@ -32,5 +32,5 @@ function createWindow(): void {
     mainWindow.show();
   });
 
-  void mainWindow.loadURL(`http://localhost:9008/index.html`);
+  void mainWindow.loadURL(`http://localhost:9009/index.html`);
 }
