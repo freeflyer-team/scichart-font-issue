@@ -3,7 +3,7 @@ import { createServer } from "node:http";
 import { app } from "electron";
 
 export function startFontServer(): void {
-  const PORT = 24_006;
+  const PORT = 24_007;
 
   const server = createServer(async (request, response) => {
     const url = new URL(request.url!, `http://${request.headers.host}`);
