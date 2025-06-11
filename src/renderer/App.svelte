@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { getFontUrl } from "./getFontUrl.ts";
   import {
     SciChartSurface,
     SciChartDefaults,
@@ -12,31 +11,16 @@
   import { onMount } from "svelte";
 
   let element1: HTMLDivElement | null = $state(null);
+  let element2: HTMLDivElement | null = $state(null);
 
   function initializeChart(chart: TWebAssemblyChart, title: string): void {
-    const fontUrl = getFontUrl("C:/Windows/Fonts/Verdana.ttf");
-    chart.sciChartSurface.registerFont("Verdana", fontUrl);
     chart.sciChartSurface.title = title;
-
-    chart.sciChartSurface.titleStyle = {
-      fontFamily: "Verdana",
-      fontSize: 17.29,
-    };
 
     const xAxis = new NumericAxis(chart.wasmContext);
     const yAxis = new NumericAxis(chart.wasmContext);
     chart.sciChartSurface.xAxes.add(xAxis);
     chart.sciChartSurface.yAxes.add(yAxis);
 
-    xAxis.labelStyle = {
-      fontFamily: "Verdana",
-      fontSize: 11.97,
-    };
-
-    yAxis.labelStyle = {
-      fontFamily: "Verdana",
-      fontSize: 11.97,
-    };
     yAxis.axisAlignment = EAxisAlignment.Left;
 
     const numSeries = 3;
@@ -59,12 +43,15 @@
 
   onMount(async (): Promise<void> => {
     SciChartSurface.UseCommunityLicense();
-    SciChartDefaults.useNativeText = true;
 
     if (element1) {
       const chart = await SciChartSurface.create(element1);
       initializeChart(chart, "FreeFlyer Plot 1");
-      chart.sciChartSurface.invalidateElement();
+    }
+
+    if (element2) {
+      const chart = await SciChartSurface.create(element2);
+      initializeChart(chart, "FreeFlyer Plot 2");
     }
   });
 </script>
@@ -79,4 +66,5 @@
 
 <main>
   <div bind:this={element1} class="container" style="width: 400px; height: 300px;"></div>
+  <div bind:this={element2} class="container" style="width: 400px; height: 300px;"></div>
 </main>
